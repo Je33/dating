@@ -122,10 +122,13 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails
+  coffee-script
   devise
+  haml
   haml-rails
   jquery-rails
   rails (= 3.2.8)
+  sass
   sass-rails
   sqlite3
   therubyracer

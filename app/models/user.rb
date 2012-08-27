@@ -6,6 +6,12 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :phone, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
+
+  validates :phone, :presence => true, :uniqueness => true, :format => /^\+79\d{2}\d{3}\d{4}$/i
+
+  def email_required?
+    false
+  end
 end

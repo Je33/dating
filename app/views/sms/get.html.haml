@@ -1,0 +1,71 @@
+.content
+  = form_tag "/" do
+    %table
+      %tr
+        %td
+          My phone
+        %td
+          = text_field_tag "phone", params[:phone]
+      %tr
+        %td
+          Message
+        %td
+          = text_area_tag "message", params[:message]
+      %tr
+        %td
+        %td
+          = submit_tag "send"
+
+- if @resp[:act]
+  %hr
+  .content
+    %table
+      %tr
+        %td
+        %td
+          = get_act @resp[:act]
+%hr
+- if @resp[:act] == "reg"
+  - if !@user.id.nil?
+    .content
+      %p= @resp[:text]
+      = form_tag "/" do
+        = hidden_field_tag "user_id", @user.id
+        %table
+          %tr
+            %td{:style => "text-align: right;"} My name is
+            %td= text_field_tag "user[name]", params[:user] ? params[:user][:name] : ""
+          %tr
+            %td{:style => "text-align: right;"} My age
+            %td= number_field_tag "user[age]", params[:user] ? params[:user][:age] : ""
+          %tr
+            %td{:style => "text-align: right;"} I am a
+            %td
+              %label
+                = radio_button_tag "user[sex]", 1
+                Men
+              %label
+                = radio_button_tag "user[sex]", 0
+                Woman
+          %tr
+            %td{:style => "text-align: right;"} I'm looking for a
+            %td
+              %label
+                = radio_button_tag "user[search_sex]", 1
+                Men
+              %label
+                = radio_button_tag "user[search_sex]", 0
+                Woman
+          %tr
+            %td{:style => "text-align: right;"} Between the ages of
+            %td= number_field_tag "user[search_age_from]", params[:search_age_from]
+          %tr
+            %td{:style => "text-align: right;"} and
+            %td= number_field_tag "user[search_age_from]", params[:search_age_to]
+  - else
+    .content
+      %p= @resp[:text]
+
+- if @resp[:act] == "mes"
+  .content
+    %p= @resp[:text]

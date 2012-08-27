@@ -22,8 +22,10 @@ ActiveRecord::Schema.define(:version => 20120823164331) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "phone",                  :default => "",                    :null => false
+    t.string   "encrypted_password",     :default => "",                    :null => false
+    t.string   "email",                  :default => ""
+    t.datetime "subscription",           :default => '2012-08-27 10:00:51'
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -32,9 +34,8 @@ ActiveRecord::Schema.define(:version => 20120823164331) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-    t.string   "phone"
+    t.datetime "created_at",                                                :null => false
+    t.datetime "updated_at",                                                :null => false
     t.string   "name"
     t.integer  "sex"
     t.integer  "age"
@@ -43,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20120823164331) do
     t.integer  "search_age_to"
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["phone"], :name => "index_users_on_phone", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end
