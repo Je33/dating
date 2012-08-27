@@ -31,37 +31,42 @@
       %p= @resp[:text]
       = form_tag "/" do
         = hidden_field_tag "user_id", @user.id
+        = hidden_field_tag "phone", params[:phone]
+        = hidden_field_tag "message", params[:message]
         %table
           %tr
             %td{:style => "text-align: right;"} My name is
-            %td= text_field_tag "user[name]", params[:user] ? params[:user][:name] : ""
+            %td= text_field_tag "user[name]", params[:user] ? params[:user][:name] : @user.name
           %tr
             %td{:style => "text-align: right;"} My age
-            %td= number_field_tag "user[age]", params[:user] ? params[:user][:age] : ""
+            %td= number_field_tag "user[age]", params[:user] ? params[:user][:age] : @user.age
           %tr
             %td{:style => "text-align: right;"} I am a
             %td
               %label
-                = radio_button_tag "user[sex]", 1
+                = radio_button_tag "user[sex]", 1, :selected => params[:user] ? params[:user][:sex].to_i == 1 ? true : false : @user.sex.to_i == 1 ? true : false
                 Men
               %label
-                = radio_button_tag "user[sex]", 0
+                = radio_button_tag "user[sex]", 0, :selected => params[:user] ? params[:user][:sex].to_i == 0 ? true : false : @user.sex.to_i == 0 ? true : false
                 Woman
           %tr
             %td{:style => "text-align: right;"} I'm looking for a
             %td
               %label
-                = radio_button_tag "user[search_sex]", 1
+                = radio_button_tag "user[search_sex]", 1, :selected => params[:user] ? params[:user][:search_sex].to_i == 1 ? true : false : @user.search_sex.to_i == 1 ? true : false
                 Men
               %label
-                = radio_button_tag "user[search_sex]", 0
+                = radio_button_tag "user[search_sex]", 0, :selected => params[:user] ? params[:user][:search_sex].to_i == 0 ? true : false : @user.search_sex.to_i == 0 ? true : false
                 Woman
           %tr
             %td{:style => "text-align: right;"} Between the ages of
-            %td= number_field_tag "user[search_age_from]", params[:search_age_from]
+            %td= number_field_tag "user[search_age_from]", params[:user] ? params[:user][:search_age_from] : @user.search_age_from
           %tr
             %td{:style => "text-align: right;"} and
-            %td= number_field_tag "user[search_age_from]", params[:search_age_to]
+            %td= number_field_tag "user[search_age_to]", params[:user] ? params[:user][:search_age_to] : @user.search_age_to
+          %tr
+            %td
+            %td= submit_tag "save"
   - else
     .content
       %p= @resp[:text]
@@ -69,3 +74,13 @@
 - if @resp[:act] == "mes"
   .content
     %p= @resp[:text]
+
+
+- if @resp[:act] == "req"
+  .content
+    %p= @resp[:text]
+    - if @list.any?
+      %p Ready to meet with you:
+      - @list.each do |m|
+        %p ##{m.id} #{m.name}, #{m.age}
+      %p Write to them from the numbers on your text. Example: 5 Hi, Irae

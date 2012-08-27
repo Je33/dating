@@ -3,6 +3,8 @@ Dating::Application.routes.draw do
 
   root :to => 'sms#get'
 
+  match '/user' => 'sms#user'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

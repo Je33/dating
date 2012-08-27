@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(:version => 20120823164331) do
     t.string   "phone",                  :default => "",                    :null => false
     t.string   "encrypted_password",     :default => "",                    :null => false
     t.string   "email",                  :default => ""
-    t.datetime "subscription",           :default => '2012-08-27 10:00:51'
+    t.datetime "subscription",           :default => '2012-08-27 16:06:36'
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
