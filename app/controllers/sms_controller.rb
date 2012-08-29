@@ -55,8 +55,8 @@ class SmsController < ApplicationController
         # request user contacts
         when "+"
           @resp[:act] = "req"
-          if allow
-            @list = User.where({:sex => u_from.search_sex, :age => u_from.search_age_from..u_from.search_age_to, :search_sex => u_from.sex}).where("search_age_from <= ? AND search_age_to >= ?", u_from.age, u_from.age)
+          if u_from && allow
+            @list = User.where({:sex => u_from.search_sex, :age => [u_from.search_age_from..u_from.search_age_to], :search_sex => u_from.sex}).where("search_age_from <= ? AND search_age_to >= ? AND id != ?", u_from.age, u_from.age, u_from.id)
           else
             @resp[:text] ||= "<font color='red'>User not found or subscription period has expired".html_safe
           end

@@ -44,19 +44,19 @@
             %td{:style => "text-align: right;"} I am a
             %td
               %label
-                = radio_button_tag "user[sex]", 1, :selected => params[:user] ? params[:user][:sex].to_i == 1 ? true : false : @user.sex.to_i == 1 ? true : false
+                = radio_button_tag "user[sex]", 1, :selected => @user.sex.to_i == 1 ? true : false
                 Men
               %label
-                = radio_button_tag "user[sex]", 0, :selected => params[:user] ? params[:user][:sex].to_i == 0 ? true : false : @user.sex.to_i == 0 ? true : false
+                = radio_button_tag "user[sex]", 0, :selected => @user.sex.to_i == 0 ? true : false
                 Woman
           %tr
             %td{:style => "text-align: right;"} I'm looking for a
             %td
               %label
-                = radio_button_tag "user[search_sex]", 1, :selected => params[:user] ? params[:user][:search_sex].to_i == 1 ? true : false : @user.search_sex.to_i == 1 ? true : false
+                = radio_button_tag "user[search_sex]", 1, :selected => @user.search_sex.to_i == 1 ? true : false
                 Men
               %label
-                = radio_button_tag "user[search_sex]", 0, :selected => params[:user] ? params[:user][:search_sex].to_i == 0 ? true : false : @user.search_sex.to_i == 0 ? true : false
+                = radio_button_tag "user[search_sex]", 0, :selected => @user.search_sex.to_i == 0 ? true : false
                 Woman
           %tr
             %td{:style => "text-align: right;"} Between the ages of
@@ -79,7 +79,7 @@
 - if @resp[:act] == "req"
   .content
     %p= @resp[:text]
-    - if @list.any?
+    - if @list && @list.any?
       %p Ready to meet with you:
       - @list.each do |m|
         %p ##{m.id} #{m.name}, #{m.age}
